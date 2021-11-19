@@ -1,5 +1,4 @@
-from PIL import Image
-
+from PIL import Image, ImageDraw, ImageFont
 
 
 # 剪裁图片的指定范围

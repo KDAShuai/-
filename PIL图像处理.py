@@ -7,14 +7,35 @@ def CropImage(filein, fileout, x1, y1, x2, y2):
     img = Image.open(filein)
     out = img.crop((x1, y1, x2, y2))
     out.save(fileout)
-
     
+    
+# 批量剪裁文件夹下所有的图片
+def CropAllImage(folderpath, x1, y1, x2, y2):
+    target = FindTargetIMage(folderpath)
+    for tar in target:
+        try:
+            CropImage(folderpath + '/' + tar, folderpath + '/' + 'Croped-' + tar, x1, y1, x2, y2)
+        except ():
+            print('图片“%s”转换失败' % tar)
+  
+
 # 调整图片尺寸
 def ResizeImage(filein, fileout, length, width):
     img = Image.open(filein)
     out = img.resize((length, width), Image.ANTIALIAS)  # ANTIALIAS为抗锯齿
     out.save(fileout)
 
+    
+# 批量调整文件夹下所有图片的尺寸
+def ResizeAllImage(folderpath, length, width):
+    target = FindTargetIMage(folderpath)
+    for tar in target:
+        if os.path.isfile(tar):
+            try:
+                ResizeImage(folderpath + '\\' + tar, folderpath + '\\' + tar, length, width)
+            except ():
+                print('图片“%s”转换失败' % tar)
+    
     
 # 垂直合并图片
 def MergeImage_Vertical(img1, img2, spacing=20):

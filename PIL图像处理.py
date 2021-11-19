@@ -55,3 +55,19 @@ def MergeImage_Horizontal(img1, img2, spacing=20):
     i3.paste(i1, (0, 0))
     i3.paste(i2, (spacing + i1.width, 0))
     return i3
+
+
+# 在图片上添加文字并居中显示  alignment=0居中(默认)，-1左对齐，1右对齐
+def AddText(target_image, text, text_font, text_size, text_color, alignment=0):
+    bg = Image.open(target_image)
+    width, height = bg.size
+    font = ImageFont.truetype(text_font, text_size)
+    w, h = font.getsize(text)
+    draw = ImageDraw.Draw(bg)
+    if alignment == 0:
+        draw.text(((width - w)/2, (height-h)/2), text, fill=text_color, font=font)
+    if alignment == -1:
+        draw.text((0, (height-h)/2), text, fill=text_color, font=font)
+    if alignment == 1:
+        draw.text((width - w, (height - h) / 2), text, fill=text_color, font=font)
+    bg.save(target_image)

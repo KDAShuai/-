@@ -9,12 +9,12 @@ def TransferFormat_fromJPGtoPNG(path):
         os.rename(path + i, path + i.replace('jpg', 'png'))
 
         
-# 批量修改文件名
-def RenameFile():
-    path = r'C:\Users\KDA帅\Desktop\HR\证件照'
+# 批量替换文件夹下所有文件的名称
+def RenameFile(filepath, old_str, new_str):
+    path = filepath  # 文件夹路径
     name = os.listdir(path)
     for i in name:
-        if '1' in i:
-            os.rename(path + '\\' + i, path + '\\' + i.replace('1', '-身份证正面'))
-        if '2' in i:
-            os.rename(path + '\\' + i, path + '\\' + i.replace('2', '-身份证反面'))
+        if old_str in i:
+            os.rename(path + '\\' + i, path + '\\' + i.replace(old_str, new_str))
+
+
